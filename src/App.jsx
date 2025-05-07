@@ -1,11 +1,10 @@
-
 import React from 'react';
 
 function App() {
   return (
-    <div>
-      <h1>Culture Fit ROI Calculator</h1>
-      <p>Your app is up and running!</p>
+    <div style={{ padding: '2rem', fontFamily: 'Arial' }}>
+      <h1>✅ It works!</h1>
+      <p>If you see this, React + Vite + Vercel are working together perfectly.</p>
     </div>
   );
 }
