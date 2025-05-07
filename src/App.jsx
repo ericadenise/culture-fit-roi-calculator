@@ -10,8 +10,8 @@ export default function App() {
     candidatesPerHire: 5,
     managerHoursPerCandidate: 5,
     recruiterHoursPerHire: 10,
-    recruiterScreeningReduction: 30, // store as whole number (30%)
-    productivityPct: 50, // store as whole number (50%)
+    recruiterScreeningReduction: 30, // % as whole number
+    productivityPct: 50, // % as whole number
     productiveDayValue: 500,
   });
 
@@ -20,21 +20,15 @@ export default function App() {
     setInputs({ ...inputs, [name]: parseFloat(value) });
   };
 
+  // Only add unit to label if it's unclear without it
   const units = {
-    hires: "people",
     timeReduction: "days",
     dailyVacancyCost: "$/day",
-    managerRate: "$/hour",
-    recruiterRate: "$/hour",
-    candidatesPerHire: "candidates",
-    managerHoursPerCandidate: "hours",
-    recruiterHoursPerHire: "hours",
     recruiterScreeningReduction: "%",
     productivityPct: "%",
     productiveDayValue: "$/day",
   };
 
-  // Convert percentage inputs from whole number to decimal
   const recruiterReduction = inputs.recruiterScreeningReduction / 100;
   const productivity = inputs.productivityPct / 100;
 
@@ -69,12 +63,15 @@ export default function App() {
         Culture Fit ROI Calculator
       </h1>
       <div className="grid gap-4 md:grid-cols-2">
-        {Object.entries(inputs).map(([key, value]) => (
-          <div key={key}>
-            <label className="block text-sm font-medium text-gray-700 capitalize">
-              {key.replace(/([A-Z])/g, " $1")}
-            </label>
-            <div className="flex items-center space-x-2">
+        {Object.entries(inputs).map(([key, value]) => {
+          const label =
+            key.replace(/([A-Z])/g, " $1") +
+            (units[key] ? ` (${units[key]})` : "");
+          return (
+            <div key={key}>
+              <label className="block text-sm font-medium text-gray-700 capitalize">
+                {label}
+              </label>
               <input
                 type="number"
                 name={key}
@@ -82,10 +79,9 @@ export default function App() {
                 onChange={handleChange}
                 className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
               />
-              <span className="text-sm text-gray-600">{units[key]}</span>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
       <div className="bg-white rounded-lg shadow p-6 space-y-3">
         <p>
