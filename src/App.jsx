@@ -72,11 +72,11 @@ export default function App() {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h1 className="text-3xl font-bold text-center">
-  The Coevolution Project: Culture Fit ROI Calculator
+  The Culture Fit ROI Calculator
 </h1>
 
 <p className="text-center text-lg text-gray-600 mt-2 max-w-2xl mx-auto">
-  See how much time and money you’ll save by using a culture fit selection system — and what it’s costing you not to.
+  Discover How Much You Can Save When Cultural Integrity Drives Hiring
 </p>
 
 
