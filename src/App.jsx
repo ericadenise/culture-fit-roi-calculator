@@ -20,7 +20,6 @@ export default function App() {
     setInputs({ ...inputs, [name]: parseFloat(value) });
   };
 
-  // Labels with simplified, user-friendly terms
   const customLabels = {
     hires: "Hires (per year)",
     managerRate: "Manager Hourly Rate (USD/hr)",
@@ -35,11 +34,11 @@ export default function App() {
     recruiterHoursPerHire: "Recruiter Hours per Hire",
   };
 
-  // Convert percentages from whole numbers
+  // Convert percentages
   const recruiterReduction = inputs.recruiterScreeningReduction / 100;
   const productivity = inputs.productivityPct / 100;
 
-  // Calculations
+  // $ Savings
   const managerSavings =
     inputs.hires *
     inputs.candidatesPerHire *
@@ -65,8 +64,13 @@ export default function App() {
   const totalSavings =
     managerSavings + recruiterSavings + downtimeSavings + directCostSavings;
 
+  // Time Savings (in hours)
+  const managerTimeSavedHours = managerSavings / inputs.managerRate;
+  const recruiterTimeSavedHours = recruiterSavings / inputs.recruiterRate;
+  const totalTimeSaved = managerTimeSavedHours + recruiterTimeSavedHours;
+
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
+    <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h1 className="text-3xl font-bold text-center">
         Culture Fit ROI Calculator
       </h1>
@@ -88,27 +92,57 @@ export default function App() {
         ))}
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6 space-y-3">
-        <p>
-          <strong>Direct Cost Savings:</strong> $
-          {directCostSavings.toLocaleString()}
-        </p>
-        <p>
-          <strong>Manager Time Savings:</strong> $
-          {managerSavings.toLocaleString()}
-        </p>
-        <p>
-          <strong>Recruiter Time Savings:</strong> $
-          {recruiterSavings.toLocaleString()}
-        </p>
-        <p>
-          <strong>Downtime Savings:</strong> $
-          {downtimeSavings.toLocaleString()}
-        </p>
-        <hr />
-        <p className="text-xl font-bold">
-          <strong>Total ROI:</strong> ${totalSavings.toLocaleString()}
-        </p>
+      {/* Two Column Output */}
+      <div className="grid md:grid-cols-2 gap-6">
+        {/* $ Savings Column */}
+        <div className="bg-white rounded-lg shadow p-6 space-y-3">
+          <p>
+            <strong>Direct Cost Savings:</strong> $
+            {directCostSavings.toLocaleString()}
+          </p>
+          <p>
+            <strong>Manager Time Savings:</strong> $
+            {managerSavings.toLocaleString()}
+          </p>
+          <p>
+            <strong>Recruiter Time Savings:</strong> $
+            {recruiterSavings.toLocaleString()}
+          </p>
+          <p>
+            <strong>Downtime Savings:</strong> $
+            {downtimeSavings.toLocaleString()}
+          </p>
+          <hr />
+          <p className="text-xl font-bold">
+            <strong>Total ROI:</strong> ${totalSavings.toLocaleString()}
+          </p>
+        </div>
+
+        {/* Time Savings Column */}
+        <div className="bg-white rounded-lg shadow p-6 space-y-3">
+          <p>
+            <strong>Manager Time Saved:</strong>{" "}
+            {managerTimeSavedHours.toLocaleString(undefined, {
+              maximumFractionDigits: 1,
+            })}{" "}
+            hours/year
+          </p>
+          <p>
+            <strong>Recruiter Time Saved:</strong>{" "}
+            {recruiterTimeSavedHours.toLocaleString(undefined, {
+              maximumFractionDigits: 1,
+            })}{" "}
+            hours/year
+          </p>
+          <hr />
+          <p className="text-xl font-bold">
+            <strong>Total Time Saved:</strong>{" "}
+            {totalTimeSaved.toLocaleString(undefined, {
+              maximumFractionDigits: 1,
+            })}{" "}
+            hours/year
+          </p>
+        </div>
       </div>
     </div>
   );
