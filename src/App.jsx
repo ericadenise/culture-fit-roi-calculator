@@ -72,8 +72,13 @@ export default function App() {
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-6">
       <h1 className="text-3xl font-bold text-center">
-        Culture Fit ROI Calculator
-      </h1>
+  The Coevolution Project: Culture Fit ROI Calculator
+</h1>
+
+<p className="text-center text-lg text-gray-600 mt-2 max-w-2xl mx-auto">
+  See how much time and money you’ll save by using a culture fit selection system — and what it’s costing you not to.
+</p>
+
 
       <div className="grid gap-4 md:grid-cols-2">
         {Object.entries(inputs).map(([key, value]) => (
