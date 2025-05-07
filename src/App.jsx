@@ -10,8 +10,8 @@ export default function App() {
     candidatesPerHire: 5,
     managerHoursPerCandidate: 5,
     recruiterHoursPerHire: 10,
-    recruiterScreeningReduction: 30, // % as whole number
-    productivityPct: 50, // % as whole number
+    recruiterScreeningReduction: 30, // stored as %
+    productivityPct: 50, // stored as %
     productiveDayValue: 500,
   });
 
@@ -20,13 +20,18 @@ export default function App() {
     setInputs({ ...inputs, [name]: parseFloat(value) });
   };
 
-  // Only add unit to label if it's unclear without it
-  const units = {
-    timeReduction: "days",
-    dailyVacancyCost: "$/day",
-    recruiterScreeningReduction: "%",
-    productivityPct: "%",
-    productiveDayValue: "$/day",
+  const customLabels = {
+    hires: "Hires (per year)",
+    managerRate: "Manager Hourly Rate (USD/hr)",
+    recruiterRate: "Recruiter Hourly Rate (USD/hr)",
+    recruiterScreeningReduction: "Recruiter Screening Reduction (%)",
+    productivityPct: "Productivity Replacement (%)",
+    productiveDayValue: "Productive Day Value ($/day)",
+    dailyVacancyCost: "Daily Cost per Vacancy ($/day)",
+    timeReduction: "Time-to-Hire Reduction (days)",
+    candidatesPerHire: "Candidates Interviewed per Hire",
+    managerHoursPerCandidate: "Manager Hours per Candidate",
+    recruiterHoursPerHire: "Recruiter Hours per Hire",
   };
 
   const recruiterReduction = inputs.recruiterScreeningReduction / 100;
@@ -63,25 +68,20 @@ export default function App() {
         Culture Fit ROI Calculator
       </h1>
       <div className="grid gap-4 md:grid-cols-2">
-        {Object.entries(inputs).map(([key, value]) => {
-          const label =
-            key.replace(/([A-Z])/g, " $1") +
-            (units[key] ? ` (${units[key]})` : "");
-          return (
-            <div key={key}>
-              <label className="block text-sm font-medium text-gray-700 capitalize">
-                {label}
-              </label>
-              <input
-                type="number"
-                name={key}
-                value={value}
-                onChange={handleChange}
-                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-              />
-            </div>
-          );
-        })}
+        {Object.entries(inputs).map(([key, value]) => (
+          <div key={key}>
+            <label className="block text-sm font-medium text-gray-700">
+              {customLabels[key] || key.replace(/([A-Z])/g, " $1")}
+            </label>
+            <input
+              type="number"
+              name={key}
+              value={value}
+              onChange={handleChange}
+              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+            />
+          </div>
+        ))}
       </div>
       <div className="bg-white rounded-lg shadow p-6 space-y-3">
         <p>
