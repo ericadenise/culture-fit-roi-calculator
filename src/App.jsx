@@ -20,13 +20,14 @@ export default function App() {
     setInputs({ ...inputs, [name]: parseFloat(value) });
   };
 
+  // Labels with simplified, user-friendly terms
   const customLabels = {
     hires: "Hires (per year)",
     managerRate: "Manager Hourly Rate (USD/hr)",
     recruiterRate: "Recruiter Hourly Rate (USD/hr)",
-    recruiterScreeningReduction: "Recruiter Screening Reduction (%)",
-    productivityPct: "Productivity Replacement (%)",
-    productiveDayValue: "Productive Day Value ($/day)",
+    recruiterScreeningReduction: "Recruiter Time Saved (%)",
+    productivityPct: "Vacancy Productivity Loss (%)",
+    productiveDayValue: "Value of One Productive Employee per Day ($)",
     dailyVacancyCost: "Daily Cost per Vacancy ($/day)",
     timeReduction: "Time-to-Hire Reduction (days)",
     candidatesPerHire: "Candidates Interviewed per Hire",
@@ -34,9 +35,11 @@ export default function App() {
     recruiterHoursPerHire: "Recruiter Hours per Hire",
   };
 
+  // Convert percentages from whole numbers
   const recruiterReduction = inputs.recruiterScreeningReduction / 100;
   const productivity = inputs.productivityPct / 100;
 
+  // Calculations
   const managerSavings =
     inputs.hires *
     inputs.candidatesPerHire *
@@ -67,6 +70,7 @@ export default function App() {
       <h1 className="text-3xl font-bold text-center">
         Culture Fit ROI Calculator
       </h1>
+
       <div className="grid gap-4 md:grid-cols-2">
         {Object.entries(inputs).map(([key, value]) => (
           <div key={key}>
@@ -83,6 +87,7 @@ export default function App() {
           </div>
         ))}
       </div>
+
       <div className="bg-white rounded-lg shadow p-6 space-y-3">
         <p>
           <strong>Direct Cost Savings:</strong> $
