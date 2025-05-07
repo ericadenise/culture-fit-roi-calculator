@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 
 export default function App() {
@@ -11,8 +10,8 @@ export default function App() {
     candidatesPerHire: 5,
     managerHoursPerCandidate: 5,
     recruiterHoursPerHire: 10,
-    recruiterScreeningReduction: 0.3,
-    productivityPct: 0.5,
+    recruiterScreeningReduction: 30, // store as whole number (30%)
+    productivityPct: 50, // store as whole number (50%)
     productiveDayValue: 500,
   });
 
@@ -21,38 +20,94 @@ export default function App() {
     setInputs({ ...inputs, [name]: parseFloat(value) });
   };
 
-  const managerSavings = inputs.hires * inputs.candidatesPerHire * inputs.managerHoursPerCandidate * 0.4 * inputs.managerRate;
-  const recruiterSavings = inputs.hires * inputs.recruiterHoursPerHire * inputs.recruiterScreeningReduction * inputs.recruiterRate;
-  const downtimeSavings = inputs.hires * inputs.timeReduction * inputs.productivityPct * inputs.productiveDayValue;
-  const directCostSavings = inputs.hires * inputs.timeReduction * inputs.dailyVacancyCost;
-  const totalSavings = managerSavings + recruiterSavings + downtimeSavings + directCostSavings;
+  const units = {
+    hires: "people",
+    timeReduction: "days",
+    dailyVacancyCost: "$/day",
+    managerRate: "$/hour",
+    recruiterRate: "$/hour",
+    candidatesPerHire: "candidates",
+    managerHoursPerCandidate: "hours",
+    recruiterHoursPerHire: "hours",
+    recruiterScreeningReduction: "%",
+    productivityPct: "%",
+    productiveDayValue: "$/day",
+  };
+
+  // Convert percentage inputs from whole number to decimal
+  const recruiterReduction = inputs.recruiterScreeningReduction / 100;
+  const productivity = inputs.productivityPct / 100;
+
+  const managerSavings =
+    inputs.hires *
+    inputs.candidatesPerHire *
+    inputs.managerHoursPerCandidate *
+    0.4 *
+    inputs.managerRate;
+
+  const recruiterSavings =
+    inputs.hires *
+    inputs.recruiterHoursPerHire *
+    recruiterReduction *
+    inputs.recruiterRate;
+
+  const downtimeSavings =
+    inputs.hires *
+    inputs.timeReduction *
+    productivity *
+    inputs.productiveDayValue;
+
+  const directCostSavings =
+    inputs.hires * inputs.timeReduction * inputs.dailyVacancyCost;
+
+  const totalSavings =
+    managerSavings + recruiterSavings + downtimeSavings + directCostSavings;
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-6">
-      <h1 className="text-3xl font-bold text-center">Culture Fit ROI Calculator</h1>
+      <h1 className="text-3xl font-bold text-center">
+        Culture Fit ROI Calculator
+      </h1>
       <div className="grid gap-4 md:grid-cols-2">
         {Object.entries(inputs).map(([key, value]) => (
           <div key={key}>
             <label className="block text-sm font-medium text-gray-700 capitalize">
-              {key.replace(/([A-Z])/g, ' $1')}
+              {key.replace(/([A-Z])/g, " $1")}
             </label>
-            <input
-              type="number"
-              name={key}
-              value={value}
-              onChange={handleChange}
-              className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
-            />
+            <div className="flex items-center space-x-2">
+              <input
+                type="number"
+                name={key}
+                value={value}
+                onChange={handleChange}
+                className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm"
+              />
+              <span className="text-sm text-gray-600">{units[key]}</span>
+            </div>
           </div>
         ))}
       </div>
       <div className="bg-white rounded-lg shadow p-6 space-y-3">
-        <p><strong>Direct Cost Savings:</strong> ${directCostSavings.toLocaleString()}</p>
-        <p><strong>Manager Time Savings:</strong> ${managerSavings.toLocaleString()}</p>
-        <p><strong>Recruiter Time Savings:</strong> ${recruiterSavings.toLocaleString()}</p>
-        <p><strong>Downtime Savings:</strong> ${downtimeSavings.toLocaleString()}</p>
+        <p>
+          <strong>Direct Cost Savings:</strong> $
+          {directCostSavings.toLocaleString()}
+        </p>
+        <p>
+          <strong>Manager Time Savings:</strong> $
+          {managerSavings.toLocaleString()}
+        </p>
+        <p>
+          <strong>Recruiter Time Savings:</strong> $
+          {recruiterSavings.toLocaleString()}
+        </p>
+        <p>
+          <strong>Downtime Savings:</strong> $
+          {downtimeSavings.toLocaleString()}
+        </p>
         <hr />
-        <p className="text-xl font-bold"><strong>Total ROI:</strong> ${totalSavings.toLocaleString()}</p>
+        <p className="text-xl font-bold">
+          <strong>Total ROI:</strong> ${totalSavings.toLocaleString()}
+        </p>
       </div>
     </div>
   );
