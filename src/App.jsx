@@ -51,7 +51,7 @@ export default function App() {
     `$${value.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-4xl mx-auto px-6 py-12 space-y-10">
       <h1 className="text-3xl font-bold mb-4 text-center">Culture Fit ROI Calculator</h1>
 
       {/* Input Fields */}
