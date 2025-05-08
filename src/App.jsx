@@ -35,7 +35,7 @@ export default function App() {
 
   const labelMap = {
     hires: "Annual hires?",
-    timeReduction: "Days to reduce hiring?",
+    timeReduction: "Days to reduce hiring one employee?",
     dailyVacancyCost: "Average daily vacancy cost?",
     managerAnnualSalary: "Average manager salary?",
     recruiterAnnualSalary: "Average recruiter salary?",
