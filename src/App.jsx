@@ -72,10 +72,8 @@ export default function App() {
         ))}
       </div>
 
-      {/* Savings Breakdown - Two Columns */}
+      {/* Savings Breakdown - Two Columns, No Heading */}
       <div className="bg-white shadow p-6 rounded space-y-6 mt-6">
-        <h2 className="text-xl font-semibold text-center">Savings Breakdown</h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Column: Cost Savings */}
           <div className="space-y-3">
