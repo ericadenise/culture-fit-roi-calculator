@@ -51,7 +51,7 @@ export default function App() {
     `$${value.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 space-y-10">
+    <div className="max-w-4xl mx-auto px-6 space-y-10">
       <h1 className="text-3xl font-bold mb-4 text-center">Culture Fit ROI Calculator</h1>
 
       {/* Input Fields */}
@@ -72,52 +72,30 @@ export default function App() {
         ))}
       </div>
 
-      {/* Output Table */}
-      <div className="bg-white shadow p-4 rounded space-y-3 mt-6">
-        <h2 className="text-xl font-semibold mb-4">Savings Breakdown</h2>
+      {/* Savings Breakdown - Two Columns */}
+      <div className="bg-white shadow p-6 rounded space-y-6 mt-6">
+        <h2 className="text-xl font-semibold text-center">Savings Breakdown</h2>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="border-b">
-                <th className="py-2 pr-4 font-medium">Category</th>
-                <th className="py-2 pr-4 font-medium">Cost Savings</th>
-                <th className="py-2 pr-4 font-medium">Hours Saved</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-b">
-                <td className="py-2 pr-4">Manager Savings</td>
-                <td className="py-2 pr-4">{formatCurrency(managerSavings)}</td>
-                <td className="py-2 pr-4">{managerHoursSaved.toLocaleString()} hrs</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-2 pr-4">Recruiter Savings</td>
-                <td className="py-2 pr-4">{formatCurrency(recruiterSavings)}</td>
-                <td className="py-2 pr-4">{recruiterHoursSaved.toLocaleString()} hrs</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-2 pr-4">Direct Cost Savings</td>
-                <td className="py-2 pr-4">{formatCurrency(directCostSavings)}</td>
-                <td className="py-2 pr-4">—</td>
-              </tr>
-              <tr className="border-b">
-                <td className="py-2 pr-4">Productivity Savings</td>
-                <td className="py-2 pr-4">{formatCurrency(downtimeSavings)}</td>
-                <td className="py-2 pr-4">—</td>
-              </tr>
-              <tr className="border-t">
-                <td className="py-2 pr-4 font-bold">Total Hours Saved</td>
-                <td className="py-2 pr-4">—</td>
-                <td className="py-2 pr-4 font-bold">{totalHoursSaved.toLocaleString()} hrs</td>
-              </tr>
-              <tr>
-                <td className="py-2 pr-4 font-bold text-xl">💰 Total ROI</td>
-                <td className="py-2 pr-4 font-bold text-xl">{formatCurrency(totalSavings)}</td>
-                <td className="py-2 pr-4"></td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Left Column: Cost Savings */}
+          <div className="space-y-3">
+            <h3 className="text-lg font-medium border-b pb-1">Cost Savings</h3>
+            <p><strong>Manager Savings:</strong> {formatCurrency(managerSavings)}</p>
+            <p><strong>Recruiter Savings:</strong> {formatCurrency(recruiterSavings)}</p>
+            <p><strong>Direct Cost Savings:</strong> {formatCurrency(directCostSavings)}</p>
+            <p><strong>Productivity Savings:</strong> {formatCurrency(downtimeSavings)}</p>
+            <p className="text-xl font-bold pt-2"><strong>💰 Total ROI:</strong> {formatCurrency(totalSavings)}</p>
+          </div>
+
+          {/* Right Column: Hours Saved */}
+          <div className="space-y-3">
+            <h3 className="text-lg font-medium border-b pb-1">Hours Saved</h3>
+            <p><strong>Manager Hours Saved:</strong> {managerHoursSaved.toLocaleString()} hrs</p>
+            <p><strong>Recruiter Hours Saved:</strong> {recruiterHoursSaved.toLocaleString()} hrs</p>
+            <p><strong>Direct Cost Savings:</strong> —</p>
+            <p><strong>Productivity Savings:</strong> —</p>
+            <p className="text-xl font-bold pt-2"><strong>Total Hours Saved:</strong> {totalHoursSaved.toLocaleString()} hrs</p>
+          </div>
         </div>
       </div>
     </div>
