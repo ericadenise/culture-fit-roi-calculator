@@ -90,8 +90,8 @@ export default function App() {
             <h3 className="text-lg font-medium border-b pb-1">Hours Saved</h3>
             <p><strong>Manager Hours Saved:</strong> {managerHoursSaved.toLocaleString()} hrs</p>
             <p><strong>Recruiter Hours Saved:</strong> {recruiterHoursSaved.toLocaleString()} hrs</p>
-            <p><strong>Direct Cost Savings:</strong> </p>
-            <p><strong>Productivity Savings:</strong> </p>
+            <p><strong>Direct Cost Savings:</strong> N/A</p>
+            <p><strong>Productivity Savings:</strong> N/A</p>
             <p className="text-xl font-bold pt-2"><strong>Total Hours Saved:</strong> {totalHoursSaved.toLocaleString()} hrs</p>
           </div>
         </div>
