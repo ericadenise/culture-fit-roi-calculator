@@ -72,14 +72,14 @@ export default function App() {
         ))}
       </div>
 
-      {/* Savings Breakdown - Two Columns, No Heading */}
+      {/* Savings Breakdown - Two Columns */}
       <div className="bg-white shadow p-6 rounded space-y-6 mt-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Column: Cost Savings */}
           <div className="space-y-3">
             <h3 className="text-lg font-medium border-b pb-1">Cost Savings</h3>
-            <p><strong>Manager Savings:</strong> {formatCurrency(managerSavings)}</p>
-            <p><strong>Recruiter Savings:</strong> {formatCurrency(recruiterSavings)}</p>
+            <p><strong>Manager Cost Savings:</strong> {formatCurrency(managerSavings)}</p>
+            <p><strong>Recruiter Cost Savings:</strong> {formatCurrency(recruiterSavings)}</p>
             <p><strong>Direct Cost Savings:</strong> {formatCurrency(directCostSavings)}</p>
             <p><strong>Productivity Savings:</strong> {formatCurrency(downtimeSavings)}</p>
             <p className="text-xl font-bold pt-2"><strong>💰 Total ROI:</strong> {formatCurrency(totalSavings)}</p>
@@ -90,8 +90,8 @@ export default function App() {
             <h3 className="text-lg font-medium border-b pb-1">Hours Saved</h3>
             <p><strong>Manager Hours Saved:</strong> {managerHoursSaved.toLocaleString()} hrs</p>
             <p><strong>Recruiter Hours Saved:</strong> {recruiterHoursSaved.toLocaleString()} hrs</p>
-            <p><strong>Direct Cost Savings:</strong> —</p>
-            <p><strong>Productivity Savings:</strong> —</p>
+            <p><strong>Direct Cost Savings:</strong> </p>
+            <p><strong>Productivity Savings:</strong> </p>
             <p className="text-xl font-bold pt-2"><strong>Total Hours Saved:</strong> {totalHoursSaved.toLocaleString()} hrs</p>
           </div>
         </div>
